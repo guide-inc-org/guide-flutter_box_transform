@@ -222,6 +222,9 @@ class TransformableBox extends StatefulWidget {
   /// Whether to paint the handle's bounds for debugging purposes.
   final bool debugPaintHandleBounds;
 
+  ///
+  final void Function(TapDownDetails)? onTapDown;
+
   /// Creates a [TransformableBox] widget.
   const TransformableBox({
     super.key,
@@ -271,6 +274,7 @@ class TransformableBox extends StatefulWidget {
     this.onTerminalHeightReached,
     this.onTerminalSizeReached,
     this.debugPaintHandleBounds = false,
+    this.onTapDown,
   })  : assert(
           (controller == null) ||
               ((rect == null) &&
@@ -549,6 +553,7 @@ class _TransformableBoxState extends State<TransformableBox> {
         onPanUpdate: onDragPanUpdate,
         onPanEnd: onDragPanEnd,
         onPanCancel: onDragPanCancel,
+        onTapDown: widget.onTapDown,
         child: content,
       );
     }
