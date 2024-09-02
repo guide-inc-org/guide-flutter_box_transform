@@ -225,10 +225,14 @@ class TransformableBox extends StatefulWidget {
   /// Whether to paint the handle's bounds for debugging purposes.
   final bool debugPaintHandleBounds;
 
+  /// Only allows dragging within y position range from 0 to this value
+  final double yPositionCanDrag;
+
   /// Creates a [TransformableBox] widget.
   const TransformableBox({
     super.key,
     required this.contentBuilder,
+    required this.yPositionCanDrag,
     this.controller,
     this.cornerHandleBuilder = _defaultCornerHandleBuilder,
     this.sideHandleBuilder = _defaultSideHandleBuilder,
@@ -507,6 +511,10 @@ class _TransformableBoxState extends State<TransformableBox> {
       return;
     } else {
       isLegalGesture = true;
+    }
+
+    if (event.localPosition.dy > widget.yPositionCanDrag) {
+      isLegalGesture = false;
     }
 
     controller.onDragStart(event.localPosition);

@@ -46,6 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
         fit: StackFit.expand,
         children: [
           TransformableBox(
+            yPositionCanDrag: 40,
             rect: rect,
             clampingRect: Offset.zero & MediaQuery.sizeOf(context),
             onChanged: (result, event) {
