@@ -228,6 +228,9 @@ class TransformableBox extends StatefulWidget {
   /// Only allows dragging within y position range from 0 to this value
   final double yPositionCanDrag;
 
+  /// Checks if the box is snapping to something.
+  final bool isSnapping;
+
   /// Creates a [TransformableBox] widget.
   const TransformableBox({
     super.key,
@@ -250,6 +253,7 @@ class TransformableBox extends StatefulWidget {
     ValueGetter<ResizeMode>? resizeModeResolver,
 
     // Additional controls.
+    this.isSnapping = false,
     this.resizable = true,
     this.draggable = true,
     this.allowFlippingWhileResizing = true,
@@ -368,7 +372,7 @@ class _TransformableBoxState extends State<TransformableBox> {
     bool shouldRecalculatePosition = false;
     bool shouldRecalculateSize = false;
 
-    if (oldWidget.rect != widget.rect) {
+    if (oldWidget.rect != widget.rect || widget.isSnapping) {
       controller.setRect(widget.rect, notify: false);
     }
 
