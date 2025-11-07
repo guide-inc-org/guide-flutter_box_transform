@@ -118,25 +118,8 @@ class BoxTransformer {
       );
     }
 
-    // Check if clampingRect is smaller than initialRect.
-    // If it is, then we return the initialRect and not resize it.
-    if (clampingRect.width < initialRect.width ||
-        clampingRect.height < initialRect.height) {
-      return ResizeResult(
-        rect: initialRect,
-        oldRect: initialRect,
-        flip: initialFlip,
-        resizeMode: resizeMode,
-        delta: delta,
-        handle: handle,
-        rawSize: initialRect.size,
-        minWidthReached: false,
-        minHeightReached: false,
-        largestRect: clampingRect,
-        maxHeightReached: false,
-        maxWidthReached: false,
-      );
-    }
+    final Box normalizedClampingRect =
+        clampingRect.expandToInclude(initialRect);
 
     // Symmetric resizing requires the delta to be doubled since it grows or
     // shrinks in all directions from center.
@@ -155,7 +138,7 @@ class BoxTransformer {
     final Resizer resizer = Resizer.from(resizeMode);
     final result = resizer.resize(
       explodedRect: explodedRect,
-      clampingRect: clampingRect,
+      clampingRect: normalizedClampingRect,
       handle: handle,
       constraints: constraints,
       initialRect: initialRect,
@@ -169,7 +152,7 @@ class BoxTransformer {
     final terminalResult = checkForTerminalSizes(
       rect: newRect,
       initialRect: initialRect,
-      clampingRect: clampingRect,
+      clampingRect: normalizedClampingRect,
       constraints: constraints,
       handle: handle,
     );

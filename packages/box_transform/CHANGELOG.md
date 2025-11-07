@@ -1,3 +1,13 @@
+## 0.4.4
+
+- Update root pubspec.yaml name from box_transform to melos_box_transform.
+- Fix repository & homepage url in pubspec.yaml
+
+## 0.4.3
+
+- Update dependencies & resolve deprecation warnings.
+- Fix a bug where terminal resize events triggered on the incorrect axis.
+
 ## 0.4.1
 
 - Remove `DoubleExt` from package exports.
@@ -30,7 +40,7 @@
 
 ## 0.1.1
 
- - Add example.
+- Add example.
 
 ## 0.1.0
 

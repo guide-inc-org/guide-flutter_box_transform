@@ -54,6 +54,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 rect = result.rect;
               });
             },
+            constraints: const BoxConstraints(
+              minWidth: 300,
+              minHeight: 300,
+            ),
             contentBuilder: (context, rect, flip) {
               return DecoratedBox(
                 decoration: BoxDecoration(

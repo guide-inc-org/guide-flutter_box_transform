@@ -41,7 +41,7 @@ final class FreeformResizer extends Resizer {
       isValid = isValidRect(newRect, constraints, clampingRect);
       if (!isValid) {
         newRect = Box.fromHandle(
-          handle.anchor(initialRect),
+          handle.anchor(effectiveInitialRect),
           handle,
           !handle.isSide || handle.isHorizontal
               ? constraints.minWidth
